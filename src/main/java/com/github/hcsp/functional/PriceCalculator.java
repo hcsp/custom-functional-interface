@@ -1,10 +1,7 @@
 package com.github.hcsp.functional;
 
-// 自定义接口
-// 下方 lamdba 表达式替代了以往内部类实现 getPrice() 方法
-interface DiscountStrategy {
-    int getPrice(int price, User user);
-}
+
+import java.util.function.BiFunction;
 
 public class PriceCalculator {
     public static void main(String[] args) {
@@ -35,8 +32,8 @@ public class PriceCalculator {
     //
     // static int calculatePrice(BiFunction<Integer,User,Integer> strategy, int price, User user)
 
-    public static int calculatePrice(DiscountStrategy discountStrategy, int price, User user) {
-        return discountStrategy.getPrice(price, user);
+    public static int calculatePrice(BiFunction<Integer, User, Integer> discountStrategy, int price, User user) {
+        return discountStrategy.apply(price, user);
     }
 
     // 下方用作提示
