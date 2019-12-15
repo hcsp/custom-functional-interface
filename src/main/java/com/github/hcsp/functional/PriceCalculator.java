@@ -7,11 +7,11 @@ public class PriceCalculator {
         int originalPrice = 100;
         User vipUser = User.vip("张三");
         // 不打折
-        int i = calculatePrice((price, user) -> price, originalPrice, vipUser);
+        calculatePrice((price, user) -> price, originalPrice, vipUser);
         // 全场95折
-        int i1 = calculatePrice((price, user) -> (int) (price * 0.95), originalPrice, vipUser);
+        calculatePrice((price, user) -> (int) (price * 0.95), originalPrice, vipUser);
         // 只有VIP打95折，其他人保持原价
-        int i2 = calculatePrice(
+        calculatePrice(
                 (price, user) -> user.isVip() ? (int) (price * 0.95) : price,
                 originalPrice,
                 vipUser);
