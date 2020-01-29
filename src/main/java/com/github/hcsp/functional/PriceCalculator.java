@@ -42,4 +42,12 @@ public class PriceCalculator {
                 throw new IllegalStateException("Should not be here!");
         }
     }
+
+    public static int calculatePrice(DiscountStrategy strategy, int price, User user) {
+        return strategy.discountStrategy(price, user);
+    }
+
+    interface DiscountStrategy {
+        int discountStrategy(Integer price, User user);
+    }
 }
