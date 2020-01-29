@@ -30,14 +30,13 @@ public class PriceCalculator {
                 return price;
             case "Discount95":
                 return (int) (price * 0.95);
-            case "OnlyVip":
-                {
-                    if (user.isVip()) {
-                        return (int) (price * 0.95);
-                    } else {
-                        return price;
-                    }
+            case "OnlyVip": {
+                if (user.isVip()) {
+                    return (int) (price * 0.95);
+                } else {
+                    return price;
                 }
+            }
             default:
                 throw new IllegalStateException("Should not be here!");
         }
