@@ -14,6 +14,16 @@ public class PriceCalculator {
                 originalPrice,
                 vipUser);
     }
+
+    public interface DiscountStrategy {
+        int discountStrategy(int price, User user);
+    }
+
+    static int calculatePrice(DiscountStrategy strategy, int price, User user) {
+        return strategy.discountStrategy(price, user);
+    }
+
+
     // 还记得策略模式么？有了函数式接口之后，策略模式的实现就更加简单了
     // 使用函数式接口重构这个方法，将原先的三种策略作为参数传入
     //
