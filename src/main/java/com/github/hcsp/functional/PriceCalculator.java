@@ -1,7 +1,5 @@
 package com.github.hcsp.functional;
 
-import java.util.function.BiFunction;
-
 public class PriceCalculator {
     public static void main(String[] args) {
         int originalPrice = 100;
