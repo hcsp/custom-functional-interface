@@ -24,11 +24,22 @@ public class PriceCalculator {
     //
     // static int calculatePrice(BiFunction<Integer,User,Integer> strategy, int price, User user)
 
-    public static int calculatePrice(DiscountStrategy discountStrategy, int price, User user) {
-        return discountStrategy.apply(price, user);
+    public static int calculatePrice(String discountStrategy, int price, User user) {
+        switch (discountStrategy) {
+            case "NoDiscount":
+                return price;
+            case "Discount95":
+                return (int) (price * 0.95);
+            case "OnlyVip":
+                {
+                    if (user.isVip()) {
+                        return (int) (price * 0.95);
+                    } else {
+                        return price;
+                    }
+                }
+            default:
+                throw new IllegalStateException("Should not be here!");
+        }
     }
-}
-
-interface DiscountStrategy {
-    Integer apply(int price, User user);
 }
