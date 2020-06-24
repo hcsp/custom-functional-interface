@@ -24,6 +24,7 @@ public class PriceCalculator {
     // 或是使用JDK自带的函数式接口BiFunction
     //
     // static int calculatePrice(BiFunction<Integer,User,Integer> strategy, int price, User user)
+
     interface DiscountStrategy {
         int calculatePrice(int price, User user);
     }
