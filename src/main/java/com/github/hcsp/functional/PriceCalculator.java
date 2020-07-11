@@ -9,7 +9,8 @@ public class PriceCalculator {
         // 全场95折
         calculatePrice((price, user) -> (int) (price * 0.95), originalPrice, vipUser);
         // 只有VIP打95折，其他人保持原价
-        calculatePrice((price, user) -> user.isVip() ? (int) (price * 0.95) : originalPrice,
+        calculatePrice(
+                (price, user) -> user.isVip() ? (int) (price * 0.95) : price,
                 originalPrice,
                 vipUser);
     }
@@ -23,11 +24,22 @@ public class PriceCalculator {
     //
     // static int calculatePrice(BiFunction<Integer,User,Integer> strategy, int price, User user)
 
-    public static int calculatePrice(DiscountStrategy<Integer, User, Integer> strategy, Integer price, User user) {
-        return strategy.apply(price, user);
-    }
-
-    interface DiscountStrategy<T, U, R> {
-        R apply(T t, U u);
+    public static int calculatePrice(String discountStrategy, int price, User user) {
+        switch (discountStrategy) {
+            case "NoDiscount":
+                return price;
+            case "Discount95":
+                return (int) (price * 0.95);
+            case "OnlyVip":
+                {
+                    if (user.isVip()) {
+                        return (int) (price * 0.95);
+                    } else {
+                        return price;
+                    }
+                }
+            default:
+                throw new IllegalStateException("Should not be here!");
+        }
     }
 }
