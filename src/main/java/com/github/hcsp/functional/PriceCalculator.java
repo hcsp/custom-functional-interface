@@ -1,7 +1,5 @@
 package com.github.hcsp.functional;
 
-import java.util.function.BiFunction;
-
 public class PriceCalculator {
     public static void main(String[] args) {
         int originalPrice = 100;
@@ -26,11 +24,7 @@ public class PriceCalculator {
     //
     // static int calculatePrice(BiFunction<Integer,User,Integer> strategy, int price, User user)
 
-    public static int calculatePrice(BiFunction<Integer, User, Integer> strategy, int price, User user) {
-        return strategy.apply(price, user);
-    }
-
-    /*public static int calculatePrice(String discountStrategy, int price, User user) {
+    public static int calculatePrice(String discountStrategy, int price, User user) {
         switch (discountStrategy) {
             case "NoDiscount":
                 return price;
@@ -47,5 +41,5 @@ public class PriceCalculator {
             default:
                 throw new IllegalStateException("Should not be here!");
         }
-    }*/
+    }
 }
