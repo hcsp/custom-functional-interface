@@ -1,7 +1,5 @@
 package com.github.hcsp.functional;
 
-import java.util.function.BiFunction;
-
 public class PriceCalculator {
     public static void main(String[] args) {
         int originalPrice = 100;
@@ -24,17 +22,7 @@ public class PriceCalculator {
     //
     // 或是使用JDK自带的函数式接口BiFunction
     //
-
-    /***
-     *
-     * @param strategy 表达式
-     * @param price 原价
-     * @param user 用户
-     * @return 打折后价格
-     */
-     static int calculatePrice(BiFunction<Integer, User, Integer> strategy, int price, User user) {
-         return strategy.apply(price, user);
-     }
+    // static int calculatePrice(BiFunction<Integer,User,Integer> strategy, int price, User user)
 
     public static int calculatePrice(String discountStrategy, int price, User user) {
         switch (discountStrategy) {
@@ -42,7 +30,8 @@ public class PriceCalculator {
                 return price;
             case "Discount95":
                 return (int) (price * 0.95);
-            case "OnlyVip": {
+            case "OnlyVip":
+                {
                     if (user.isVip()) {
                         return (int) (price * 0.95);
                     } else {
