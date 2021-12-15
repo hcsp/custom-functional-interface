@@ -1,4 +1,5 @@
 package com.github.hcsp.functional;
+
 public class PriceCalculator {
     public static void main(String[] args) {
         int originalPrice = 100;
@@ -6,14 +7,13 @@ public class PriceCalculator {
         // 不打折
         calculatePrice((price, user) -> price, originalPrice, vipUser);
         // 全场95折
-        calculatePrice((price, user) -> (int) ((int) price * 0.95), originalPrice, vipUser);
+        calculatePrice((price, user) -> (int) (price * 0.95), originalPrice, vipUser);
         // 只有VIP打95折，其他人保持原价
         calculatePrice(
                 (price, user) -> user.isVip() ? (int) (price * 0.95) : price,
                 originalPrice,
                 vipUser);
     }
-
     // 还记得策略模式么？有了函数式接口之后，策略模式的实现就更加简单了
     // 使用函数式接口重构这个方法，将原先的三种策略作为参数传入
     //
@@ -24,15 +24,22 @@ public class PriceCalculator {
     //
     // static int calculatePrice(BiFunction<Integer,User,Integer> strategy, int price, User user)
 
-    /*public static Integer calculatePrice(BiFunction<Integer, User, Integer> discountStrategy, int price, User user) {
-        return discountStrategy.apply(price,user);
-    }*/
-
-    public static int calculatePrice(DiscountStrategy discountStrategy, int price, User user) {
-        return discountStrategy.calculatePrice(price, user);
-    }
-
-    public interface DiscountStrategy {
-        int calculatePrice(int price, User user);
+    public static int calculatePrice(String discountStrategy, int price, User user) {
+        switch (discountStrategy) {
+            case "NoDiscount":
+                return price;
+            case "Discount95":
+                return (int) (price * 0.95);
+            case "OnlyVip":
+                {
+                    if (user.isVip()) {
+                        return (int) (price * 0.95);
+                    } else {
+                        return price;
+                    }
+                }
+            default:
+                throw new IllegalStateException("Should not be here!");
+        }
     }
 }
