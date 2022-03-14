@@ -26,7 +26,7 @@ public class PriceCalculator {
     //
     // static int calculatePrice(BiFunction<Integer,User,Integer> strategy, int price, User user)
 
-    public static int calculatePrice(BiFunction<Integer,User,Integer> strategy, int price, User user) {
+    public static int calculatePrice(BiFunction<Integer, User, Integer> strategy, int price, User user) {
         return strategy.apply(price, user);
     }
 }
