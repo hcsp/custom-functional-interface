@@ -26,7 +26,7 @@ public class PriceCalculator {
     // 或是使用JDK自带的函数式接口BiFunction
     //
     static int calculatePrice(BiFunction<Integer, User, Integer> strategy, int price, User user) {
-        return strategy.apply(price,user);
+        return strategy.apply(price, user);
     }
 
     public static int calculatePrice(String discountStrategy, int price, User user) {
@@ -35,14 +35,13 @@ public class PriceCalculator {
                 return price;
             case "Discount95":
                 return (int) (price * 0.95);
-            case "OnlyVip":
-                {
-                    if (user.isVip()) {
-                        return (int) (price * 0.95);
-                    } else {
-                        return price;
-                    }
+            case "OnlyVip": {
+                if (user.isVip()) {
+                    return (int) (price * 0.95);
+                } else {
+                    return price;
                 }
+            }
             default:
                 throw new IllegalStateException("Should not be here!");
         }
