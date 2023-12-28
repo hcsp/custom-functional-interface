@@ -1,5 +1,7 @@
 package com.github.hcsp.functional;
 
+import java.util.function.BiFunction;
+
 public class PriceCalculator {
     public static void main(String[] args) {
         int originalPrice = 100;
@@ -18,11 +20,13 @@ public class PriceCalculator {
     // 使用函数式接口重构这个方法，将原先的三种策略作为参数传入
     //
     // 你可以选择自己声明一个接口，例如DiscountStrategy：
-    // static int calculatePrice(DiscountStrategy strategy, int price, User user)
+
     //
     // 或是使用JDK自带的函数式接口BiFunction
     //
-    // static int calculatePrice(BiFunction<Integer,User,Integer> strategy, int price, User user)
+     static int calculatePrice(BiFunction<Integer,User,Integer> strategy, int price, User user){
+        return strategy.apply(price,user);
+     }
 
     public static int calculatePrice(String discountStrategy, int price, User user) {
         switch (discountStrategy) {
