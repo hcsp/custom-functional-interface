@@ -18,7 +18,14 @@ public class PriceCalculator {
     // 使用函数式接口重构这个方法，将原先的三种策略作为参数传入
     //
     // 你可以选择自己声明一个接口，例如DiscountStrategy：
-    // static int calculatePrice(DiscountStrategy strategy, int price, User user)
+
+    public interface DiscountStrategy {
+        int apply(int price, User user);
+    }
+
+     static int calculatePrice(DiscountStrategy strategy, int price, User user) {
+        return strategy.apply(price, user);
+     }
     //
     // 或是使用JDK自带的函数式接口BiFunction
     //
